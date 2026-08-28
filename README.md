@@ -1,1 +1,8 @@
-# Dev-Blog-Knowledge-Base
+# Dev Blog & Knowledge Base
+
+Run:
+```bash
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
