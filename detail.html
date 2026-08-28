@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>{{ post.title }}</title><style>body{font-family:sans-serif;padding:2rem;background:#0b0f19;color:#fff;max-width:800px;margin:auto;}a{color:#38bdf8;}.content{background:#1e293b;padding:2rem;border-radius:8px;line-height:1.7;margin:1rem 0;}input,textarea{width:100%;margin-bottom:8px;padding:8px;background:#0f172a;border:1px solid #334155;color:#fff;}button{background:#0284c7;color:#fff;padding:8px 16px;border:none;cursor:pointer;}.comment{background:#131c2e;padding:1rem;border-radius:6px;margin-bottom:8px;}</style></head>
+<body>
+  <a href="/">&larr; Back to articles</a>
+  <h1 style="color:#38bdf8;margin-top:1rem;">{{ post.title }}</h1>
+  <p style="color:#94a3b8;">{{ post.category }} | By {{ post.author }}</p>
+  <div class="content">{{ post.content|linebreaks }}</div>
+
+  <h3>Discussion ({{ post.comments.count }})</h3>
+  {% for c in post.comments.all %}
+    <div class="comment">
+      <b>{{ c.author_name }}</b> <small style="color:#94a3b8;">{{ c.created_at|date:"H:i, M d" }}</small>
+      <p style="margin-top:4px;">{{ c.body }}</p>
+    </div>
+  {% empty %}
+    <p style="color:#94a3b8;">No comments yet.</p>
+  {% endfor %}
+
+  <form method="POST" style="margin-top:1.5rem;">
+    {% csrf_token %}
+    <input name="author_name" placeholder="Your Name" required>
+    <textarea name="body" placeholder="Join the discussion..." required></textarea>
+    <button type="submit">Post Comment</button>
+  </form>
+</body>
+</html>

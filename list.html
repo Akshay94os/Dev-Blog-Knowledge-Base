@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dev Knowledge Base</title><style>body{font-family:sans-serif;padding:2rem;background:#0b0f19;color:#fff;max-width:800px;margin:auto;}a{color:#38bdf8;text-decoration:none;}.card{background:#1e293b;padding:1.5rem;margin-bottom:1rem;border-radius:8px;border:1px solid #334155;}.tag{background:#0284c7;padding:2px 8px;border-radius:4px;font-size:0.75rem;}</style></head>
+<body>
+  <h1>Technical Knowledge Base</h1>
+  <p style="color:#94a3b8;margin-bottom:1.5rem;">Articles, architectural logs, and engineering writeups.</p>
+  {% for p in posts %}
+    <div class="card">
+      <span class="tag">{{ p.category }}</span>
+      <h2><a href="/post/{{ p.slug }}/">{{ p.title }}</a></h2>
+      <p style="color:#94a3b8;font-size:0.85rem;">By {{ p.author }} on {{ p.created_at|date:"M d, Y" }}</p>
+    </div>
+  {% empty %}
+    <p>No articles posted yet. Use /admin to publish initial posts.</p>
+  {% endfor %}
+</body>
+</html>
